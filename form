@@ -218,20 +218,10 @@ def Contours():
     global name1
     my_photo = cv.imread(name1)
     img_grey = cv.cvtColor(my_photo, cv.COLOR_BGR2GRAY)
-
-    # зададим порог
     thresh = 70
-
-    # получим картинку, обрезанную порогом
     ret, thresh_img = cv.threshold(img_grey, thresh, 255, cv.THRESH_BINARY)
-
-    # надем контуры
     contours, hierarchy = cv.findContours(thresh_img, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
-
-    # создадим пустую картинку
     img_contours = np.zeros(my_photo.shape)
-
-    # отобразим контуры
     cv.drawContours(img_contours, contours, -1, (255, 255, 255), 1)
 
     image = Image.fromarray(img_contours.astype(np.uint8))
